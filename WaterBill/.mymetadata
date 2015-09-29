@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="WaterBill"
+  id="myeclipse.1443496869635"
+  context-root="/WaterBill"
+  j2ee-spec="6.0"
+  archive="WaterBill.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
