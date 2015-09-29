@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.multipart.maxSize" value="20480000"/>
+    <constant name="struts.multipart.saveDir" value="//home//beyond//GitHubSrc//UserPictures"/>
+   
+	<package name="UserManagement" namespace="/" extends="struts-default,json-default">
+
+		<action name="useraction" class="com.appointphoto.UserAction">
+			<result name="success">
+				/SuccessRegistration.jsp
+			</result>
+			<result name="fail">
+				/ErrorRegistration.jsp
+			</result>
+			<result name="exception">/Exception.jsp</result>
+			<exception-mapping exception="java.lang.Exception"
+				result="exception" />
+		</action>
+		
+			<action name="adminLoginAction" class="adminLoginAction" method="execute">			
+            <result name="success" > 
+             /Admin.jsp
+             </result>
+             <result name="error" > 
+             /ErrorRegistration.jsp
+             </result>
+             <result name="exception">/Exception.jsp</result>
+			<exception-mapping exception="java.lang.Exception"
+				result="exception" />
+		</action>
+		
+		<action name="userLoginAction" class="userLoginAction" method="execute">
+			<!-- <interceptor-ref name="json">  
+                <param name="contentType">application/json</param>  
+            </interceptor-ref>  
+             -->
+            <result type="json" > 
+             <param name="root">result</param> 
+             </result>
+             <result name="exception">/Exception.jsp</result>
+			<exception-mapping exception="java.lang.Exception"
+				result="exception" />
+		</action>
+		
+	
+		
+		<action name="userRegisterAction" class="userRegisterAction" method="registerUser">
+			 <!--  <interceptor-ref name="json">  
+                <param name="contentType">application/json</param>  
+            </interceptor-ref>  
+            -->
+            <result type="json" > 
+              <param name="root">result</param> 
+             </result>
+             <result name="exception">/Exception.jsp</result>
+			<exception-mapping exception="java.lang.Exception"
+				result="exception" />
+		</action>
+		
+		<action name="UserUploadImageAction" method="execute" class="userUploadImageAction">
+            <param name="savePath">/home/beyond/GitHubSrc/UserPictures</param>
+            <result name="success">SuccessRegistration.jsp</result>
+            <result name="input">/upload.jsp</result>
+             
+            <!-- 拦截器堆栈的修改 -->
+            <interceptor-ref name="defaultStack">
+                <!-- 最大上传的字节 -->
+                <param name="fileUpload.maximumSize">
+                    5120000
+                </param>
+                <!--  <param name="fileUpload.allowedTypes">
+                    image/png,
+                    image/jpeg,
+                    application/msword
+                </param>
+                -->
+            </interceptor-ref>
+        </action>
+        
+        <action name="WebUserUploadImageAction" method="execute" class="webUserUploadImageAction">
+            <param name="pathRoot">/home/beyond/GitHubSrc/UserPictures</param>
+      		 <result name="success">
+				/SuccessRegistration.jsp
+			</result>
+			<result name="fail">
+				/ErrorRegistration.jsp
+			</result>
+        </action>
+        
+            <action name="CheckUserAction" method="checkUser" class="checkUserAction">
+      		 <result name="success">
+				/CheckUser.jsp
+			</result>
+			<result name="fail">
+				/ErrorRegistration.jsp
+			</result>
+        </action>
+	</package>
+
+</struts>
